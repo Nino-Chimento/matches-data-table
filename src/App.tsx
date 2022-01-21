@@ -1,7 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import { FormMatch } from "./components/form";
-import { convertDate } from "./utils/formatDate";
+import { convertDate } from "./utils/FormatDate/convertDate";
 import { parseResponse } from "./utils/parseResponse";
 export interface MatchType {
   id: number;

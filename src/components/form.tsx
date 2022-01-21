@@ -1,7 +1,7 @@
-import { FC } from "react";
+import { FC, FormEvent } from "react";
 
 interface FormMatcProps {
-  handleSubmit: (e: any) => void;
+  handleSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }
 
 export const FormMatch: FC<FormMatcProps> = ({ handleSubmit }) => {
