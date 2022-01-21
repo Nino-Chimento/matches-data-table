@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
 import { FormMatch } from "./components/form";
+import { TableMatches } from "./components/table";
 import { convertDate } from "./utils/FormatDate/convertDate";
 import { parseResponse } from "./utils/parseResponse";
 export interface MatchType {
@@ -52,33 +53,7 @@ function App() {
       <div className="mb-5">
         <FormMatch handleSubmit={handleSubmit} />
       </div>
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">id</th>
-            <th scope="col">teams</th>
-            <th scope="col">Date</th>
-            <th scope="col">Time</th>
-            <th scope="col">Result</th>
-            <th scope="col">Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {matches &&
-            matches.map((match: MatchType) => (
-              <tr>
-                <th>{match.id}</th>
-                <th>{match.teams}</th>
-                <th>{match.date}</th>
-                <th>{match.time}</th>
-                <th>{match.result}</th>
-                <th onClick={() => handleDelete(match.id)}>
-                  <span className="btn btn-danger">delete</span>
-                </th>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <TableMatches matches={matches} handleDelete={handleDelete} />
     </div>
   );
 }
