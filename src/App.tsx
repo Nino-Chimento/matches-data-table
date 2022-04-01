@@ -1,7 +1,10 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
+import { Counter } from "./components/counter";
+
 import { FormMatch } from "./components/form";
 import { TableMatches } from "./components/table";
+
 import { convertDate } from "./utils/FormatDate/convertDate";
 import { parseResponse } from "./utils/parseResponse";
 export interface MatchType {
@@ -47,8 +50,10 @@ function App() {
 
     setMatches(newMatches);
   };
+
   return (
     <div className="App">
+      <Counter />
       <h1 className="text-center">Data Table Matches</h1>
       <div className="mb-5">
         <FormMatch handleSubmit={handleSubmit} />
@@ -59,3 +64,6 @@ function App() {
 }
 
 export default App;
+function selectorCounter(selectorCounter: any) {
+  throw new Error("Function not implemented.");
+}
