@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { MatchType } from "../App";
+import { MatchType } from "../Types/MatchTypes";
 
 interface TableMatchesProps {
   matches: MatchType[];
@@ -10,8 +10,6 @@ export const TableMatches: FC<TableMatchesProps> = ({
   matches,
   handleDelete,
 }) => {
-  console.log(matches, "table");
-
   return (
     <table className="table">
       <thead>
@@ -27,7 +25,7 @@ export const TableMatches: FC<TableMatchesProps> = ({
       <tbody>
         {matches &&
           matches.map((match: MatchType) => (
-            <tr>
+            <tr key={match.id}>
               <th>{match.id}</th>
               <th>{match.teams}</th>
               <th>{match.date}</th>

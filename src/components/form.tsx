@@ -6,7 +6,7 @@ interface FormMatcProps {
 
 export const FormMatch: FC<FormMatcProps> = ({ handleSubmit }) => {
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} id="match-form">
       <div className="mb-3">
         <label htmlFor="exampleFormControlInput1" className="form-label">
           Date
@@ -64,7 +64,7 @@ export const FormMatch: FC<FormMatcProps> = ({ handleSubmit }) => {
         name="result"
         id="result"
       >
-        <option selected>Open this select menu</option>
+        <option value="">Open this select menu</option>
         <option value="away">Away</option>
         <option value="home">Home</option>
       </select>

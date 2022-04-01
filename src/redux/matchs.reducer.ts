@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { MatchType } from "../App";
+import { MatchType } from "../Types/MatchTypes";
 import { parseResponse } from "../utils/parseResponse";
 
 const fetchData = async () => {
+  matchLoading(true);
   try {
     const response = await fetch("https://www.dontouch.ch/json/cc.json");
     const json = await response.json();
@@ -14,19 +15,19 @@ const fetchData = async () => {
 };
 
 export const matchesFetch = createAsyncThunk("matches/success", async () => {
+  matchLoading(true);
   const response = await fetchData();
-
   return response;
 });
 
 interface MatchesState {
   entities: [];
-  loading: "idle" | "pending" | "succeeded" | "failed";
+  loading: boolean;
 }
 
 const initialState = {
   entities: [],
-  loading: "idle",
+  loading: false,
 } as MatchesState;
 
 // Then, handle actions in your reducers:
@@ -35,12 +36,19 @@ export const matchesReducer = createSlice({
   initialState,
   reducers: {
     matchesSuccess(state, action) {
-      state = action.payload;
+      state.entities = action.payload;
+      state.loading = false;
     },
     matchDelete(state, action) {
       state.entities = state.entities.filter(
         (match: MatchType) => match.id !== action.payload
       ) as never;
+    },
+    matchAdd(state, action) {
+      state.entities.unshift(action.payload as never);
+    },
+    matchLoading(state, action) {
+      state.loading = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -50,4 +58,4 @@ export const matchesReducer = createSlice({
   },
 });
 
-export const { matchDelete } = matchesReducer.actions;
+export const { matchDelete, matchAdd, matchLoading } = matchesReducer.actions;

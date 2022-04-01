@@ -5,40 +5,21 @@ import { Counter } from "./components/counter";
 
 import { FormMatch } from "./components/form";
 import { TableMatches } from "./components/table";
+import { UseMatches } from "./hooks/useMatches";
 
-import { matchDelete, matchesFetch } from "./redux/matchs.reducer";
-import { selectorMatches } from "./redux/selector";
+import { matchAdd, matchDelete, matchesFetch } from "./redux/matchs.reducer";
+import { selectorMatches, selectorMatchesLoading } from "./redux/selector";
+import { MatchType } from "./Types/MatchTypes";
 
 import { convertDate } from "./utils/FormatDate/convertDate";
+import { cancelForm } from "./utils/utils";
 
-export interface MatchType {
-  id: number;
-  date: string;
-  time: string;
-  result: string;
-  teams: string;
-}
 function App() {
-  const matches = useSelector(selectorMatches);
-
+  const { matches, loading } = UseMatches();
   const dispatch = useDispatch();
 
-  console.log(matches);
   useEffect(() => {
-    // const url = "https://www.dontouch.ch/json/cc.json";
-
-    // const fetchData = async () => {
-    //   try {
-    //     const response = await fetch(url);
-    //     const json = await response.json();
-    //     const arrayValue = Object.values(json.doc[0].data.matches);
-    //     setMatches(parseResponse(arrayValue.slice(0, 20)));
-    //   } catch (error) {
-    //     console.log("error", error);
-    //   }
-    // };
     dispatch(matchesFetch());
-    // fetchData();
   }, []);
 
   const handleDelete = (id: number) => {
@@ -53,17 +34,23 @@ function App() {
     const teams =
       `${e.target["team-away"].value} / ${e.target["team-home"].value}`.toUpperCase();
     const match: MatchType = { id, date, time, result, teams };
-    const newMatches = [...matches, match];
+    dispatch(matchAdd(match));
+    cancelForm();
   };
 
   return (
     <div className="App">
-      <Counter />
-      <h1 className="text-center">Data Table Matches</h1>
-      <div className="mb-5">
-        <FormMatch handleSubmit={handleSubmit} />
-      </div>
-      <TableMatches matches={matches} handleDelete={handleDelete} />
+      {loading && <div>Spinner</div>}
+      {!loading && (
+        <>
+          <Counter />
+          <h1 className="text-center">Data Table Matches</h1>
+          <div className="mb-5">
+            <FormMatch handleSubmit={handleSubmit} />
+          </div>
+          <TableMatches matches={matches} handleDelete={handleDelete} />
+        </>
+      )}
     </div>
   );
 }

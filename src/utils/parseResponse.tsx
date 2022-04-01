@@ -1,4 +1,4 @@
-import { MatchType } from "../App";
+import { MatchType } from "../Types/MatchTypes";
 
 export const parseResponse = (array: any): MatchType[] => {
   const result = array.map((data: any) => {
