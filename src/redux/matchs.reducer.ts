@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { MatchType } from "../App";
 import { parseResponse } from "../utils/parseResponse";
 
 const fetchData = async () => {
@@ -36,6 +37,11 @@ export const matchesReducer = createSlice({
     matchesSuccess(state, action) {
       state = action.payload;
     },
+    matchDelete(state, action) {
+      state.entities = state.entities.filter(
+        (match: MatchType) => match.id !== action.payload
+      ) as never;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(matchesFetch.fulfilled, (state, action) => {
@@ -43,3 +49,5 @@ export const matchesReducer = createSlice({
     });
   },
 });
+
+export const { matchDelete } = matchesReducer.actions;

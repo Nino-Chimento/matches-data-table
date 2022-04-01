@@ -1,15 +1,16 @@
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Counter } from "./components/counter";
 
 import { FormMatch } from "./components/form";
 import { TableMatches } from "./components/table";
-import { matchesFetch } from "./redux/matchs.reducer";
+
+import { matchDelete, matchesFetch } from "./redux/matchs.reducer";
 import { selectorMatches } from "./redux/selector";
 
 import { convertDate } from "./utils/FormatDate/convertDate";
-import { parseResponse } from "./utils/parseResponse";
+
 export interface MatchType {
   id: number;
   date: string;
@@ -41,8 +42,7 @@ function App() {
   }, []);
 
   const handleDelete = (id: number) => {
-    const result = matches.filter((match: MatchType) => match.id !== id);
-    // setMatches(result);
+    dispatch(matchDelete(id));
   };
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -54,8 +54,6 @@ function App() {
       `${e.target["team-away"].value} / ${e.target["team-home"].value}`.toUpperCase();
     const match: MatchType = { id, date, time, result, teams };
     const newMatches = [...matches, match];
-
-    //  setMatches(newMatches);
   };
 
   return (
@@ -71,6 +69,3 @@ function App() {
 }
 
 export default App;
-function selectorCounter(selectorCounter: any) {
-  throw new Error("Function not implemented.");
-}
