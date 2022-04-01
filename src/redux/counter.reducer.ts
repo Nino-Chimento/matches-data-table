@@ -8,3 +8,10 @@ export const counterReducer = createReducer(0, {
     state - action.payload,
   [reset.type]: (state: number) => (state = 0),
 });
+
+export const counterReducerBuider = createReducer(0, (builder) =>
+  builder
+    .addCase(increment, (state, action) => state + action.payload)
+    .addCase(decrement, (state, action) => state - action.payload)
+    .addCase(reset, (state) => (state = 0))
+);

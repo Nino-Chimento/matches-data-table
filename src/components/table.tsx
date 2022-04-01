@@ -10,6 +10,8 @@ export const TableMatches: FC<TableMatchesProps> = ({
   matches,
   handleDelete,
 }) => {
+  console.log(matches, "table");
+
   return (
     <table className="table">
       <thead>

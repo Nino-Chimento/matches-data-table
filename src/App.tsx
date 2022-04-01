@@ -1,9 +1,12 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Counter } from "./components/counter";
 
 import { FormMatch } from "./components/form";
 import { TableMatches } from "./components/table";
+import { matchesFetch } from "./redux/matchs.reducer";
+import { selectorMatches } from "./redux/selector";
 
 import { convertDate } from "./utils/FormatDate/convertDate";
 import { parseResponse } from "./utils/parseResponse";
@@ -15,27 +18,31 @@ export interface MatchType {
   teams: string;
 }
 function App() {
-  let [matches, setMatches] = useState<MatchType[]>([]);
+  const matches = useSelector(selectorMatches);
 
+  const dispatch = useDispatch();
+
+  console.log(matches);
   useEffect(() => {
-    const url = "https://www.dontouch.ch/json/cc.json";
+    // const url = "https://www.dontouch.ch/json/cc.json";
 
-    const fetchData = async () => {
-      try {
-        const response = await fetch(url);
-        const json = await response.json();
-        const arrayValue = Object.values(json.doc[0].data.matches);
-        setMatches(parseResponse(arrayValue.slice(0, 20)));
-      } catch (error) {
-        console.log("error", error);
-      }
-    };
-    fetchData();
+    // const fetchData = async () => {
+    //   try {
+    //     const response = await fetch(url);
+    //     const json = await response.json();
+    //     const arrayValue = Object.values(json.doc[0].data.matches);
+    //     setMatches(parseResponse(arrayValue.slice(0, 20)));
+    //   } catch (error) {
+    //     console.log("error", error);
+    //   }
+    // };
+    dispatch(matchesFetch());
+    // fetchData();
   }, []);
 
   const handleDelete = (id: number) => {
     const result = matches.filter((match: MatchType) => match.id !== id);
-    setMatches(result);
+    // setMatches(result);
   };
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -48,7 +55,7 @@ function App() {
     const match: MatchType = { id, date, time, result, teams };
     const newMatches = [...matches, match];
 
-    setMatches(newMatches);
+    //  setMatches(newMatches);
   };
 
   return (

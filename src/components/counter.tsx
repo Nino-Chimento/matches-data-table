@@ -6,6 +6,7 @@ import { selectorCounter } from "../redux/selector";
 export const Counter: FC = () => {
   const dispatch = useDispatch();
   const counter = useSelector(selectorCounter);
+
   return (
     <>
       <div className="w-100 d-flex justify-content-between p-3">
