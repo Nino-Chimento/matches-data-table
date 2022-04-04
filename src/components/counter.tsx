@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { decrement, increment, reset } from "../redux/actions";
 import { selectorCounter } from "../redux/selector";
 
