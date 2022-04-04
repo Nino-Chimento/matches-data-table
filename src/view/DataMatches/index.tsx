@@ -1,16 +1,14 @@
+import { FormMatch } from "components/form";
+import { TableMatches } from "components/table";
+import { UseMatches } from "hooks/useMatches";
 import { FC, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { FormMatch } from "../../../components/form";
-import { TableMatches } from "../../../components/table";
-import { UseMatches } from "../../../hooks/useMatches";
-import {
-  matchAdd,
-  matchDelete,
-  matchesFetch,
-} from "../../../redux/matchs.reducer";
-import { MatchType } from "../../../Types/MatchTypes";
-import { convertDate } from "../../../utils/FormatDate/convertDate";
-import { cancelForm } from "../../../utils/utils";
+import { matchAdd, matchDelete, matchesFetch } from "redux/matchs.reducer";
+import { MatchType } from "Types/MatchTypes";
+import { convertDate } from "utils/FormatDate/convertDate";
+import { cancelForm } from "utils/utils";
+
+
 
 export const DataMatchesView: FC = () => {
   const { matches } = UseMatches();

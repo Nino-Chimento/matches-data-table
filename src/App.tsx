@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import Main from "./components/main";
 
 const CounterView = lazy(() => import("./view/Counter/CounterView"));
-const DataMatchesView = lazy(() => import("./view/Counter/DataMatches"));
+const DataMatchesView = lazy(() => import("./view/DataMatches"));
 
 function App() {
   return (
