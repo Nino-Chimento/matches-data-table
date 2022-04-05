@@ -12,19 +12,30 @@ export const Counter: FC = () => {
     <>
       <div className="w-100 d-flex justify-content-between p-3">
         <button
+          id="counter-increment"
           className="btn btn-success"
           onClick={() => dispatch(increment(1))}
         >
           add
         </button>
-        <button className="btn btn-info" onClick={() => dispatch(decrement(1))}>
+        <button
+          id="counter-decrement"
+          className="btn btn-info"
+          onClick={() => dispatch(decrement(1))}
+        >
           decrement
         </button>
-        <button className="btn btn-danger" onClick={() => dispatch(reset())}>
+        <button
+          id="counter-reset"
+          className="btn btn-danger"
+          onClick={() => dispatch(reset())}
+        >
           reset
         </button>
       </div>
-      <div className="text-center">{counter}</div>
+      <div className="text-center" id="counter">
+        {counter}
+      </div>
     </>
   );
 };
