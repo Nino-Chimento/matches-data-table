@@ -30,6 +30,7 @@ it("counter button change value counter", () => {
   expect(counter?.innerHTML).toEqual("0");
   buttonIncrement?.click();
   buttonIncrement?.click();
+  expect(counter?.innerHTML).toEqual("2");
   buttonReset?.click();
   expect(counter?.innerHTML).toEqual("0");
 });
