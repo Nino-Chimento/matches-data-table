@@ -68,7 +68,13 @@ export const FormMatch: FC<FormMatcProps> = ({ handleSubmit }) => {
         <option value="away">Away</option>
         <option value="home">Home</option>
       </select>
-      <button className="btn btn-success mt-2">Send</button>
+      <button
+        name="send-form-matches"
+        id="send-form-matches"
+        className="btn btn-success mt-2"
+      >
+        Send
+      </button>
     </form>
   );
 };
